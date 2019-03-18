@@ -4,36 +4,51 @@
 #
 Name     : R-PerformanceAnalytics
 Version  : 1.5.2
-Release  : 27
+Release  : 28
 URL      : https://cran.r-project.org/src/contrib/PerformanceAnalytics_1.5.2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/PerformanceAnalytics_1.5.2.tar.gz
 Summary  : Econometric Tools for Performance and Risk Analysis
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
-Requires: R-PerformanceAnalytics-lib
+Requires: R-PerformanceAnalytics-lib = %{version}-%{release}
 Requires: R-Hmisc
+Requires: R-caTools
+Requires: R-car
+Requires: R-cli
+Requires: R-gdata
 Requires: R-gplots
+Requires: R-gtools
 Requires: R-quadprog
+Requires: R-quantmod
+Requires: R-quantreg
 Requires: R-timeSeries
+Requires: R-tseries
+Requires: R-withr
 Requires: R-xts
 Requires: R-zoo
 BuildRequires : R-Hmisc
+BuildRequires : R-caTools
+BuildRequires : R-car
+BuildRequires : R-cli
+BuildRequires : R-gdata
 BuildRequires : R-gplots
+BuildRequires : R-gtools
 BuildRequires : R-quadprog
+BuildRequires : R-quantmod
+BuildRequires : R-quantreg
 BuildRequires : R-timeSeries
+BuildRequires : R-tseries
+BuildRequires : R-withr
 BuildRequires : R-xts
 BuildRequires : R-zoo
-BuildRequires : clr-R-helpers
+BuildRequires : buildreq-R
 
 %description
-performance and risk analysis. This package aims to aid
-    practitioners and researchers in utilizing the latest
-    research in analysis of non-normal return streams.  In
-    general, it is most tested on return (rather than
-    price) data on a regular scale, but most functions will
-    work with irregular return data as well, and increasing
-    numbers of functions will work with P&L or price data
-    where possible.
+# PerformanceAnalytics: Econometric tools for performance and risk analysis.
+`PerformanceAnalytics` provides an R package of econometric functions
+for performance and risk analysis of financial instruments or portfolios.
+This package aims to aid practitioners and researchers in using the latest research for
+analysis of both normally and non-normally distributed return streams.
 
 %package lib
 Summary: lib components for the R-PerformanceAnalytics package.
@@ -51,11 +66,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530451978
+export SOURCE_DATE_EPOCH=1552878898
 
 %install
+export SOURCE_DATE_EPOCH=1552878898
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1530451978
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -73,9 +88,9 @@ echo "FFLAGS = $FFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 echo "CXXFLAGS = $CXXFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library PerformanceAnalytics
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx2 ; mv $i.avx2 ~/.stash/; done
-echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " > ~/.R/Makevars
-echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " >> ~/.R/Makevars
-echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512  " >> ~/.R/Makevars
+echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize " > ~/.R/Makevars
+echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
+echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --preclean --install-tests --no-test-load --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library PerformanceAnalytics
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx512 ; mv $i.avx512 ~/.stash/; done
 echo "CFLAGS = $CFLAGS -ftree-vectorize " > ~/.R/Makevars
@@ -90,8 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library PerformanceAnalytics|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  PerformanceAnalytics || :
 
 
 %files
@@ -148,7 +162,9 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/PerformanceAnalytics/help/paths.rds
 /usr/lib64/R/library/PerformanceAnalytics/html/00Index.html
 /usr/lib64/R/library/PerformanceAnalytics/html/R.css
-/usr/lib64/R/library/PerformanceAnalytics/libs/symbols.rds
+/usr/lib64/R/library/PerformanceAnalytics/tests/Examples/PerformanceAnalytics-Ex.Rout.save
+/usr/lib64/R/library/PerformanceAnalytics/tests/testthat.R
+/usr/lib64/R/library/PerformanceAnalytics/tests/testthat/test_toPeriodContributions.R
 
 %files lib
 %defattr(-,root,root,-)

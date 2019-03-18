@@ -1,0 +1,16 @@
+1.5.2
+R-Hmisc
+R-caTools
+R-car
+R-cli
+R-gdata
+R-gplots
+R-gtools
+R-quadprog
+R-quantmod
+R-quantreg
+R-timeSeries
+R-tseries
+R-withr
+R-xts
+R-zoo

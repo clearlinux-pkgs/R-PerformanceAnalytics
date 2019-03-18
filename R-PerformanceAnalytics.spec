@@ -4,7 +4,7 @@
 #
 Name     : R-PerformanceAnalytics
 Version  : 1.5.2
-Release  : 26
+Release  : 27
 URL      : https://cran.r-project.org/src/contrib/PerformanceAnalytics_1.5.2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/PerformanceAnalytics_1.5.2.tar.gz
 Summary  : Econometric Tools for Performance and Risk Analysis

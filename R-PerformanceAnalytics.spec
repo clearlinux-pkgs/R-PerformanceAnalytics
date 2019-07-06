@@ -4,7 +4,7 @@
 #
 Name     : R-PerformanceAnalytics
 Version  : 1.5.3
-Release  : 31
+Release  : 32
 URL      : https://cran.r-project.org/src/contrib/PerformanceAnalytics_1.5.3.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/PerformanceAnalytics_1.5.3.tar.gz
 Summary  : Econometric Tools for Performance and Risk Analysis

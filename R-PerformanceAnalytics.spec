@@ -4,7 +4,7 @@
 #
 Name     : R-PerformanceAnalytics
 Version  : 2.0.4
-Release  : 36
+Release  : 37
 URL      : https://cran.r-project.org/src/contrib/PerformanceAnalytics_2.0.4.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/PerformanceAnalytics_2.0.4.tar.gz
 Summary  : Econometric Tools for Performance and Risk Analysis
@@ -20,10 +20,12 @@ BuildRequires : R-zoo
 BuildRequires : buildreq-R
 
 %description
-# PerformanceAnalytics: Econometric tools for performance and risk analysis.
-[![Travis Build
-Status](https://travis-ci.org/braverock/PerformanceAnalytics.svg?branch=master)](https://travis-ci.org/braverock/PerformanceAnalytics)
-[![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/PerformanceAnalytics)](https://cran.r-project.org/package=PerformanceAnalytics)
+analysis. In addition to standard risk and performance metrics, this 
+    package aims to aid practitioners and researchers in utilizing the latest
+    research in analysis of non-normal return streams.  In general, it is most 
+    tested on return (rather than price) data on a regular scale, but most 
+    functions will work with irregular return data as well, and increasing
+    numbers of functions will work with P&L or price data where possible.
 
 %package lib
 Summary: lib components for the R-PerformanceAnalytics package.
@@ -35,21 +37,22 @@ lib components for the R-PerformanceAnalytics package.
 
 %prep
 %setup -q -c -n PerformanceAnalytics
+cd %{_builddir}/PerformanceAnalytics
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1581052350
+export SOURCE_DATE_EPOCH=1589572800
 
 %install
-export SOURCE_DATE_EPOCH=1581052350
+export SOURCE_DATE_EPOCH=1589572800
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
